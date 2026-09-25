@@ -85,8 +85,6 @@ export type Lead = {
 export type SettingRow = { key: string; value: string; label: string; sort_order: number };
 export type Settings = Record<string, string>;
 
-const order = (a: string, b = "sort_order") => ({ a, b });
-void order;
 
 export const servicesQuery = {
   queryKey: ["services"],
