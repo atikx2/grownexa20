@@ -57,7 +57,7 @@ export function CrudTable({
       ? supabase.from(table).update(payload as never).eq("id", id)
       : supabase.from(table).insert(payload as never);
     const { error } = await q;
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Saved");
     setEditing(null);
     qc.invalidateQueries({ queryKey: [queryKey] });
@@ -66,7 +66,7 @@ export function CrudTable({
   async function remove(id: string) {
     if (!confirm("Delete this item?")) return;
     const { error } = await supabase.from(table).delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: [queryKey] });
   }
 

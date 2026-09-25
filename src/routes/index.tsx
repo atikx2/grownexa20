@@ -54,7 +54,7 @@ function Home() {
       <Section eyebrow="What we do" title="Three focused service areas">
         <div className="grid gap-5 md:grid-cols-3">
           {CATEGORIES.map((c) => {
-            const Icon = CATEGORY_ICON[c];
+            const Icon = CATEGORY_ICON[c] ?? ShieldCheck;
             return (
               <Link key={c} to="/services" className="glass-card group rounded-3xl p-7 transition-transform hover:-translate-y-1">
                 <span className="bg-gradient-brand grid size-12 place-items-center rounded-2xl text-primary-foreground">

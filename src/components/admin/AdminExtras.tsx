@@ -24,7 +24,7 @@ export function LeadsPanel() {
 
   async function update(id: string, patch: Partial<Lead>) {
     const { error } = await supabase.from("leads").update(patch).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["admin_leads"] });
   }
   async function remove(id: string) {
@@ -74,7 +74,7 @@ export function SettingsPanel() {
     for (const r of data) {
       if (vals[r.key] !== r.value) {
         const { error } = await supabase.from("site_settings").update({ value: vals[r.key] ?? "" }).eq("key", r.key);
-        if (error) return toast.error(error.message);
+        if (error) { toast.error(error.message); return; }
       }
     }
     toast.success("Contact details saved");
