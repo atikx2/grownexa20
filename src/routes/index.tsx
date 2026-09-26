@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, MessageSquare, BadgeCheck, Smartphone } from "lucide-react";
+import { CountUp } from "@/components/site/CountUp";
 import heroImg from "@/assets/hero-glow.jpg";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Section } from "@/components/site/Section";
@@ -76,13 +77,33 @@ function Home() {
           <div className="glass-card grid grid-cols-2 gap-6 rounded-3xl p-8 md:grid-cols-4">
             {stats.map((s) => (
               <div key={s.id} className="text-center">
-                <p className="text-gradient font-display text-4xl font-bold">{s.value}</p>
+                <p className="text-gradient font-display text-4xl font-bold sm:text-5xl"><CountUp value={s.value} /></p>
                 <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
               </div>
             ))}
           </div>
         </Section>
       ) : null}
+
+      <Section eyebrow="Why Grownexa20" title="Built on clarity, not hype">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            [BadgeCheck, "Clear scopes", "You know exactly what's delivered before you pay."],
+            [Zap, "Fast turnaround", "Agreed timelines, with progress updates along the way."],
+            [MessageSquare, "Direct contact", "Talk to us on WhatsApp or email — no ticket queues."],
+            [Smartphone, "Mobile-first", "Everything we build looks great on every screen."],
+          ].map(([Icon, t, d]) => {
+            const I = Icon as typeof Zap;
+            return (
+              <div key={t as string} className="glass-card rounded-3xl p-6 transition-transform hover:-translate-y-1">
+                <I className="size-6 text-brand-cyan" />
+                <p className="mt-4 font-semibold">{t as string}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{d as string}</p>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
 
       <Section eyebrow="How we work" title="A simple, transparent process">
         <div className="grid gap-5 md:grid-cols-4">
