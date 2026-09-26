@@ -113,17 +113,36 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 </SheetTrigger>
                 <SheetContent side="right" className="border-border bg-background/95 backdrop-blur">
                   <div className="mt-10 flex flex-col gap-1 px-2">
-                    {NAV.map((item) => (
-                      <Link
-                        key={item.to}
-                        to={item.to}
-                        onClick={() => setOpen(false)}
-                        className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                        activeProps={{ className: "text-foreground bg-secondary" }}
-                        activeOptions={{ exact: item.to === "/" }}
-                      >
-                        {item.label}
-                      </Link>
+                    {NAV.map((item, i) => (
+                      <Fragment key={item.to}>
+                        {i === 1 ? (
+                          <>
+                            <p className="mt-4 px-4 pt-2 pb-1 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                              Services
+                            </p>
+                            {SERVICE_LINKS.map((s) => (
+                              <Link
+                                key={s.slug}
+                                to="/services/$slug"
+                                params={{ slug: s.slug }}
+                                onClick={() => setOpen(false)}
+                                className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                              >
+                                {s.label}
+                              </Link>
+                            ))}
+                          </>
+                        ) : null}
+                        <Link
+                          to={item.to}
+                          onClick={() => setOpen(false)}
+                          className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                          activeProps={{ className: "text-foreground bg-secondary" }}
+                          activeOptions={{ exact: item.to === "/" }}
+                        >
+                          {item.label}
+                        </Link>
+                      </Fragment>
                     ))}
                   </div>
                 </SheetContent>
