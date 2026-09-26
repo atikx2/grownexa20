@@ -22,6 +22,13 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+const SERVICE_LINKS = [
+  { slug: "website", label: "Web design" },
+  { slug: "youtube", label: "YouTube" },
+  { slug: "seo", label: "SEO" },
+  { slug: "spotify", label: "Spotify" },
+] as const;
+
 export function Logo() {
   return (
     <Link to="/" className="flex items-center gap-2.5">
