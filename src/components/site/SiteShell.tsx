@@ -108,18 +108,23 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <h4 className="text-sm font-semibold">Services</h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link to="/services" className="hover:text-foreground">
+                <Link to="/services/$slug" params={{ slug: "website" }} className="hover:text-foreground">
                   Website Services
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-foreground">
+                <Link to="/services/$slug" params={{ slug: "youtube" }} className="hover:text-foreground">
                   YouTube Services
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-foreground">
-                  Music Promotion
+                <Link to="/services/$slug" params={{ slug: "spotify" }} className="hover:text-foreground">
+                  Spotify & Music
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/$slug" params={{ slug: "seo" }} className="hover:text-foreground">
+                  SEO Services
                 </Link>
               </li>
               <li>
