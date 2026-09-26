@@ -51,16 +51,43 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
             <Logo />
             <nav className="hidden items-center gap-1 lg:flex">
-              {NAV.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  activeProps={{ className: "text-foreground" }}
-                  activeOptions={{ exact: item.to === "/" }}
-                >
-                  {item.label}
-                </Link>
+              {NAV.map((item, i) => (
+                <Fragment key={item.to}>
+                  {i === 1 ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground data-[state=open]:text-foreground">
+                        Services
+                        <ChevronDown className="size-3.5" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start" className="border-border bg-background/95 backdrop-blur">
+                        {SERVICE_LINKS.map((s) => (
+                          <DropdownMenuItem key={s.slug} asChild>
+                            <Link
+                              to="/services/$slug"
+                              params={{ slug: s.slug }}
+                              className="cursor-pointer"
+                            >
+                              {s.label}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                        <DropdownMenuItem asChild>
+                          <Link to="/services" className="cursor-pointer">
+                            All services
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : null}
+                  <Link
+                    to={item.to}
+                    className="rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    activeProps={{ className: "text-foreground" }}
+                    activeOptions={{ exact: item.to === "/" }}
+                  >
+                    {item.label}
+                  </Link>
+                </Fragment>
               ))}
             </nav>
             <div className="flex items-center gap-2">
