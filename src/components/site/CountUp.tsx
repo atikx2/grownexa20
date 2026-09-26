@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function CountUp({ value, duration = 1600 }: { value: string; duration?: number }) {
   const match = value.match(/^(\D*)([\d,.]+)(.*)$/);
-  const target = match ? Number(match[2].replace(/,/g, "")) : NaN;
+  const target = match ? Number((match[2] ?? "").replace(/,/g, "")) : NaN;
   const [n, setN] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
 
