@@ -320,33 +320,42 @@ export type Database = {
       team_members: {
         Row: {
           created_at: string
+          facebook_url: string | null
           id: string
           image_url: string | null
+          instagram_url: string | null
           is_active: boolean
           name: string
           occupation: string
           sort_order: number
           updated_at: string
+          youtube_url: string | null
         }
         Insert: {
           created_at?: string
+          facebook_url?: string | null
           id?: string
           image_url?: string | null
+          instagram_url?: string | null
           is_active?: boolean
           name: string
           occupation?: string
           sort_order?: number
           updated_at?: string
+          youtube_url?: string | null
         }
         Update: {
           created_at?: string
+          facebook_url?: string | null
           id?: string
           image_url?: string | null
+          instagram_url?: string | null
           is_active?: boolean
           name?: string
           occupation?: string
           sort_order?: number
           updated_at?: string
+          youtube_url?: string | null
         }
         Relationships: []
       }
