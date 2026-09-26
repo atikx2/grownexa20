@@ -1,13 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState, type ReactNode } from "react";
-import { Menu, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Fragment, useState, type ReactNode } from "react";
+import { Menu, ChevronDown, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import { settingsQuery, whatsappLink } from "@/lib/content";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
   { to: "/portfolio", label: "Portfolio" },
   { to: "/pricing", label: "Pricing" },
   { to: "/reviews", label: "Reviews" },
@@ -15,6 +20,13 @@ const NAV = [
   { to: "/about", label: "About" },
   { to: "/team", label: "Team" },
   { to: "/contact", label: "Contact" },
+] as const;
+
+const SERVICE_LINKS = [
+  { slug: "website", label: "Web design" },
+  { slug: "youtube", label: "YouTube" },
+  { slug: "seo", label: "SEO" },
+  { slug: "spotify", label: "Spotify" },
 ] as const;
 
 export function Logo() {
@@ -46,16 +58,47 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
             <Logo />
             <nav className="hidden items-center gap-1 lg:flex">
-              {NAV.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  activeProps={{ className: "text-foreground" }}
-                  activeOptions={{ exact: item.to === "/" }}
-                >
-                  {item.label}
-                </Link>
+              {NAV.map((item, i) => (
+                <Fragment key={item.to}>
+                  {i === 1 ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground data-[state=open]:text-foreground">
+                        Services
+                        <ChevronDown className="size-3.5" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="start"
+                        sideOffset={10}
+                        className="min-w-48 border-border bg-card shadow-xl shadow-black/40"
+                      >
+                        {SERVICE_LINKS.map((s) => (
+                          <DropdownMenuItem key={s.slug} asChild>
+                            <Link
+                              to="/services/$slug"
+                              params={{ slug: s.slug }}
+                              className="cursor-pointer text-sm text-foreground"
+                            >
+                              {s.label}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                        <DropdownMenuItem asChild>
+                          <Link to="/services" className="cursor-pointer text-sm text-foreground">
+                            All services
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : null}
+                  <Link
+                    to={item.to}
+                    className="rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    activeProps={{ className: "text-foreground" }}
+                    activeOptions={{ exact: item.to === "/" }}
+                  >
+                    {item.label}
+                  </Link>
+                </Fragment>
               ))}
             </nav>
             <div className="flex items-center gap-2">
@@ -74,17 +117,36 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 </SheetTrigger>
                 <SheetContent side="right" className="border-border bg-background/95 backdrop-blur">
                   <div className="mt-10 flex flex-col gap-1 px-2">
-                    {NAV.map((item) => (
-                      <Link
-                        key={item.to}
-                        to={item.to}
-                        onClick={() => setOpen(false)}
-                        className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                        activeProps={{ className: "text-foreground bg-secondary" }}
-                        activeOptions={{ exact: item.to === "/" }}
-                      >
-                        {item.label}
-                      </Link>
+                    {NAV.map((item, i) => (
+                      <Fragment key={item.to}>
+                        {i === 1 ? (
+                          <>
+                            <p className="mt-4 px-4 pt-2 pb-1 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                              Services
+                            </p>
+                            {SERVICE_LINKS.map((s) => (
+                              <Link
+                                key={s.slug}
+                                to="/services/$slug"
+                                params={{ slug: s.slug }}
+                                onClick={() => setOpen(false)}
+                                className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                              >
+                                {s.label}
+                              </Link>
+                            ))}
+                          </>
+                        ) : null}
+                        <Link
+                          to={item.to}
+                          onClick={() => setOpen(false)}
+                          className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                          activeProps={{ className: "text-foreground bg-secondary" }}
+                          activeOptions={{ exact: item.to === "/" }}
+                        >
+                          {item.label}
+                        </Link>
+                      </Fragment>
                     ))}
                   </div>
                 </SheetContent>
