@@ -18,7 +18,7 @@ function ServicesPage() {
       <Section className="!pt-0">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORY_PAGES.map((pg) => {
-            const Icon = CATEGORY_ICON[pg.category];
+            const Icon = CATEGORY_ICON[pg.category] ?? ArrowRight;
             return (
               <Link key={pg.slug} to="/services/$slug" params={{ slug: pg.slug }} className="glass-card group rounded-3xl p-7 transition-transform hover:-translate-y-1">
                 <span className="bg-gradient-brand grid size-12 place-items-center rounded-2xl text-primary-foreground"><Icon className="size-6" /></span>
