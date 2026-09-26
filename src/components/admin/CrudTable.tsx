@@ -26,7 +26,7 @@ export function CrudTable({
   titleKey,
   subtitleKey,
 }: {
-  table: "services" | "packages" | "portfolio_items" | "reviews" | "faqs" | "statistics";
+  table: "services" | "packages" | "portfolio_items" | "reviews" | "faqs" | "statistics" | "team_members";
   queryKey: string;
   fields: Field[];
   titleKey: string;
