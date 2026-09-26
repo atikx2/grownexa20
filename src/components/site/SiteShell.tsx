@@ -66,20 +66,24 @@ export function SiteShell({ children }: { children: ReactNode }) {
                         Services
                         <ChevronDown className="size-3.5" />
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start" className="border-border bg-background/95 backdrop-blur">
+                      <DropdownMenuContent
+                        align="start"
+                        sideOffset={10}
+                        className="min-w-48 border-border bg-card shadow-xl shadow-black/40"
+                      >
                         {SERVICE_LINKS.map((s) => (
                           <DropdownMenuItem key={s.slug} asChild>
                             <Link
                               to="/services/$slug"
                               params={{ slug: s.slug }}
-                              className="cursor-pointer"
+                              className="cursor-pointer text-sm text-foreground"
                             >
                               {s.label}
                             </Link>
                           </DropdownMenuItem>
                         ))}
                         <DropdownMenuItem asChild>
-                          <Link to="/services" className="cursor-pointer">
+                          <Link to="/services" className="cursor-pointer text-sm text-foreground">
                             All services
                           </Link>
                         </DropdownMenuItem>
