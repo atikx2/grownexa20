@@ -44,6 +44,7 @@ export type Review = {
   id: string;
   author_name: string;
   author_role: string;
+  author_image: string | null;
   rating: number;
   content: string;
   category: string | null;

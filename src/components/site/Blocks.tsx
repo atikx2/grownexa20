@@ -92,9 +92,16 @@ export function ReviewsList({ limit }: { limit?: number }) {
             ))}
           </div>
           <blockquote className="mt-4 text-sm leading-relaxed">“{r.content}”</blockquote>
-          <figcaption className="mt-5 text-sm">
-            <span className="font-semibold">{r.author_name}</span>
-            {r.author_role ? <span className="text-muted-foreground"> · {r.author_role}</span> : null}
+          <figcaption className="mt-5 flex items-center gap-3 text-sm">
+            {r.author_image ? (
+              <img src={r.author_image} alt={r.author_name} loading="lazy" width={48} height={48} className="size-12 rounded-full object-cover ring-2 ring-primary/40" />
+            ) : (
+              <span className="bg-gradient-brand grid size-12 place-items-center rounded-full font-bold text-primary-foreground">{r.author_name.charAt(0)}</span>
+            )}
+            <span>
+              <span className="block font-semibold">{r.author_name}</span>
+              {r.author_role ? <span className="block text-xs text-muted-foreground">{r.author_role}</span> : null}
+            </span>
           </figcaption>
         </figure>
       ))}
