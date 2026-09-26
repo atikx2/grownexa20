@@ -43,7 +43,7 @@ const F = {
     { key: "title", label: "Title", type: "text" },
     { key: "category", label: "Category", type: "category" },
     { key: "summary", label: "Summary", type: "textarea" },
-    { key: "image_url", label: "Image URL", type: "text" },
+    { key: "image_url", label: "Image", type: "image" },
     { key: "link_url", label: "Project link", type: "text" },
     { key: "sort_order", label: "Order", type: "number" },
     { key: "is_active", label: "Visible", type: "bool" },
@@ -51,6 +51,7 @@ const F = {
   reviews: [
     { key: "author_name", label: "Client name", type: "text" },
     { key: "author_role", label: "Role / company", type: "text" },
+    { key: "author_image", label: "Client photo", type: "image" },
     { key: "rating", label: "Rating (1–5)", type: "number" },
     { key: "content", label: "Review", type: "textarea" },
     { key: "sort_order", label: "Order", type: "number" },

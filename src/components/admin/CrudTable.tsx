@@ -14,7 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 export type Field = {
   key: string;
   label: string;
-  type: "text" | "textarea" | "number" | "bool" | "category" | "list";
+  type: "text" | "textarea" | "number" | "bool" | "category" | "list" | "image";
 };
 
 type Row = Record<string, unknown> & { id: string };
@@ -122,6 +122,8 @@ export function CrudTable({
                         onChange={(e) => set(f.key, e.target.value.split("\n"))}
                         onBlur={(e) => set(f.key, e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))}
                       />
+                    ) : f.type === "image" ? (
+                      <ImageField value={String(v ?? "")} onChange={(url) => set(f.key, url)} />
                     ) : f.type === "bool" ? (
                       <div><Switch checked={!!v} onCheckedChange={(c) => set(f.key, c)} /></div>
                     ) : f.type === "category" ? (
@@ -143,6 +145,29 @@ export function CrudTable({
           ) : null}
         </DialogContent>
       </Dialog>
+    </div>
+  );
+}
+
+function ImageField({ value, onChange }: { value: string; onChange: (url: string) => void }) {
+  const [busy, setBusy] = useState(false);
+  async function upload(file: File) {
+    setBusy(true);
+    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
+    const { error } = await supabase.storage.from("media").upload(path, file);
+    if (error) { setBusy(false); toast.error(error.message); return; }
+    const { data, error: e2 } = await supabase.storage.from("media").createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+    setBusy(false);
+    if (e2 || !data) { toast.error(e2?.message ?? "Upload failed"); return; }
+    onChange(data.signedUrl);
+    toast.success("Image uploaded");
+  }
+  return (
+    <div className="space-y-2">
+      {value ? <img src={value} alt="" className="h-28 rounded-lg object-cover" /> : null}
+      <Input type="file" accept="image/*" disabled={busy} onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
+      <Input placeholder="…or paste an image URL" value={value} onChange={(e) => onChange(e.target.value)} />
+      {value ? <Button type="button" variant="ghost" size="sm" onClick={() => onChange("")}>Remove image</Button> : null}
     </div>
   );
 }
