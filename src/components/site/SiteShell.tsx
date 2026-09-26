@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment, useState, type ReactNode } from "react";
 import { Menu, ChevronDown, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
-import { settingsQuery, whatsappLink, CATEGORY_PAGES } from "@/lib/content";
+import { settingsQuery, whatsappLink } from "@/lib/content";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
