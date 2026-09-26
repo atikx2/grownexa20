@@ -20,7 +20,7 @@ export const Route = createFileRoute("/admin")({
 
 const F = {
   services: [
-    { key: "category", label: "Category", type: "category" },
+    { key: "category", label: "Page", type: "category" },
     { key: "title", label: "Title", type: "text" },
     { key: "slug", label: "URL slug", type: "text" },
     { key: "summary", label: "Summary", type: "textarea" },
@@ -29,7 +29,7 @@ const F = {
     { key: "is_active", label: "Visible", type: "bool" },
   ],
   packages: [
-    { key: "category", label: "Category", type: "category" },
+    { key: "category", label: "Page", type: "category" },
     { key: "name", label: "Name", type: "text" },
     { key: "price", label: "Price", type: "number" },
     { key: "currency", label: "Currency", type: "text" },
@@ -42,7 +42,7 @@ const F = {
   ],
   portfolio: [
     { key: "title", label: "Title", type: "text" },
-    { key: "category", label: "Category", type: "category" },
+    { key: "category", label: "Page", type: "category" },
     { key: "summary", label: "Summary", type: "textarea" },
     { key: "image_url", label: "Image", type: "image" },
     { key: "link_url", label: "Project link", type: "text" },

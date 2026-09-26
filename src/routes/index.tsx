@@ -6,7 +6,7 @@ import heroImg from "@/assets/hero-glow.jpg";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Section } from "@/components/site/Section";
 import { CATEGORY_ICON, ContactCta, ReviewsList } from "@/components/site/Blocks";
-import { CATEGORIES, statisticsQuery } from "@/lib/content";
+import { CATEGORY_PAGES, statisticsQuery } from "@/lib/content";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -18,11 +18,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const BLURB: Record<string, string> = {
-  "Website Services": "Fast, modern websites and landing pages designed to convert visitors into enquiries.",
-  "YouTube Services": "Editing, thumbnails, channel setup and SEO-friendly metadata for creators.",
-  "Music Promotion": "Release planning, Spotify profile optimisation, playlist pitching and campaign content.",
-};
 
 function Home() {
   const { data: stats = [] } = useQuery(statisticsQuery);
@@ -52,17 +47,17 @@ function Home() {
         </div>
       </section>
 
-      <Section eyebrow="What we do" title="Three focused service areas">
-        <div className="grid gap-5 md:grid-cols-3">
-          {CATEGORIES.map((c) => {
-            const Icon = CATEGORY_ICON[c] ?? ShieldCheck;
+      <Section eyebrow="What we do" title="Four focused service areas">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {CATEGORY_PAGES.map((pg) => {
+            const Icon = CATEGORY_ICON[pg.category] ?? ShieldCheck;
             return (
-              <Link key={c} to="/services" className="glass-card group rounded-3xl p-7 transition-transform hover:-translate-y-1">
+              <Link key={pg.slug} to="/services/$slug" params={{ slug: pg.slug }} className="glass-card group rounded-3xl p-7 transition-transform hover:-translate-y-1">
                 <span className="bg-gradient-brand grid size-12 place-items-center rounded-2xl text-primary-foreground">
                   <Icon className="size-6" />
                 </span>
-                <h3 className="mt-6 text-xl font-bold">{c}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{BLURB[c]}</p>
+                <h3 className="mt-6 text-xl font-bold">{pg.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pg.blurb}</p>
                 <span className="mt-5 inline-flex items-center gap-1 text-sm text-brand-cyan">
                   Learn more <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </span>

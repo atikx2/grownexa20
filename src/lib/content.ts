@@ -1,6 +1,12 @@
 import { supabase } from "@/integrations/supabase/client";
 
-export const CATEGORIES = ["Website Services", "YouTube Services", "Music Promotion"] as const;
+export const CATEGORIES = ["Website", "YouTube", "Spotify", "SEO"] as const;
+export const CATEGORY_PAGES = [
+  { slug: "website", category: "Website", title: "Website Services", blurb: "Fast, modern websites designed and built for your business." },
+  { slug: "youtube", category: "YouTube", title: "YouTube Services", blurb: "Editing, thumbnails and channel optimisation for creators." },
+  { slug: "spotify", category: "Spotify", title: "Spotify & Music Promotion", blurb: "Release support and honest promotion for artists." },
+  { slug: "seo", category: "SEO", title: "SEO Services", blurb: "Audits, on-page fixes and local SEO — no ranking guarantees." },
+] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Service = {
