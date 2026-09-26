@@ -1,0 +1,2 @@
+INSERT INTO public.user_roles (user_id, role) SELECT id, 'admin' FROM auth.users WHERE email = 'atikhasan315377@gmail.com' ON CONFLICT (user_id, role) DO NOTHING;
+DELETE FROM public.user_roles WHERE user_id IN (SELECT id FROM auth.users WHERE email = 'admin@gmail.com');
