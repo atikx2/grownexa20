@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { Star, Globe, Youtube, Music, Mail, MessageCircle } from "lucide-react";
+import { Star, Globe, Youtube, Music, Search, Mail, MessageCircle } from "lucide-react";
 import {
   CATEGORIES,
   packagesQuery,
@@ -13,9 +13,10 @@ import { PackageCard } from "@/components/site/PackageCard";
 import { EmptyState } from "@/components/site/Section";
 
 export const CATEGORY_ICON: Record<string, typeof Globe> = {
-  "Website Services": Globe,
-  "YouTube Services": Youtube,
-  "Music Promotion": Music,
+  Website: Globe,
+  YouTube: Youtube,
+  Spotify: Music,
+  SEO: Search,
 };
 
 export function ServicesGrid({ category }: { category?: string }) {

@@ -5,7 +5,7 @@ import { ContactCta, ServicesGrid } from "@/components/site/Blocks";
 import { CATEGORIES } from "@/lib/content";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () =>
     pageHead(
       "Services",
