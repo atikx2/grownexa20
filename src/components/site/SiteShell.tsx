@@ -115,8 +115,14 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 >
                   <Menu className="size-5" />
                 </SheetTrigger>
-                <SheetContent side="right" className="border-border bg-background/95 backdrop-blur">
-                  <div className="mt-10 flex flex-col gap-1 px-2">
+                <SheetContent
+                  side="right"
+                  className="flex flex-col border-border bg-background/95 p-0 backdrop-blur"
+                >
+                  <div className="flex h-16 shrink-0 items-center border-b border-border px-5">
+                    <Logo />
+                  </div>
+                  <nav className="flex flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-2 py-4">
                     {NAV.map((item, i) => (
                       <Fragment key={item.to}>
                         {i === 1 ? (
@@ -148,6 +154,15 @@ export function SiteShell({ children }: { children: ReactNode }) {
                         </Link>
                       </Fragment>
                     ))}
+                  </nav>
+                  <div className="shrink-0 border-t border-border p-5">
+                    <Link
+                      to="/contact"
+                      onClick={() => setOpen(false)}
+                      className="bg-gradient-brand flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-primary-foreground"
+                    >
+                      Start a project
+                    </Link>
                   </div>
                 </SheetContent>
               </Sheet>
