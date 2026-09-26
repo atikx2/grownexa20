@@ -17,8 +17,8 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ReviewsRouteImport } from './routes/reviews'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,14 +60,14 @@ const ReviewsRoute = ReviewsRouteImport.update({
   path: '/reviews',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -80,8 +80,8 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/reviews': typeof ReviewsRoute
-  '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -92,8 +92,8 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/reviews': typeof ReviewsRoute
-  '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -105,8 +105,8 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/reviews': typeof ReviewsRoute
-  '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -119,8 +119,8 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/pricing'
     | '/reviews'
-    | '/services'
     | '/team'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -131,8 +131,8 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/pricing'
     | '/reviews'
-    | '/services'
     | '/team'
+    | '/services'
   id:
     | '__root__'
     | '/'
@@ -143,8 +143,8 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/pricing'
     | '/reviews'
-    | '/services'
     | '/team'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -156,8 +156,8 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   PricingRoute: typeof PricingRoute
   ReviewsRoute: typeof ReviewsRoute
-  ServicesRoute: typeof ServicesRoute
   TeamRoute: typeof TeamRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -218,18 +218,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/team': {
       id: '/team'
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -244,8 +244,8 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   PricingRoute: PricingRoute,
   ReviewsRoute: ReviewsRoute,
-  ServicesRoute: ServicesRoute,
   TeamRoute: TeamRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
