@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/site/SiteShell";
 import { CrudTable, type Field } from "@/components/admin/CrudTable";
 import { LeadsPanel, SettingsPanel } from "@/components/admin/AdminExtras";
+import { AdminsPanel } from "@/components/admin/AdminsPanel";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -70,6 +71,13 @@ const F = {
     { key: "sort_order", label: "Order", type: "number" },
     { key: "is_active", label: "Visible", type: "bool" },
   ],
+  team: [
+    { key: "name", label: "Name", type: "text" },
+    { key: "occupation", label: "Occupation", type: "text" },
+    { key: "image_url", label: "Photo", type: "image" },
+    { key: "sort_order", label: "Order", type: "number" },
+    { key: "is_active", label: "Visible", type: "bool" },
+  ],
 } satisfies Record<string, Field[]>;
 
 function AdminPage() {
@@ -117,7 +125,7 @@ function AdminPage() {
         ) : (
           <Tabs defaultValue="leads">
             <TabsList className="flex h-auto flex-wrap">
-              {["leads", "services", "packages", "portfolio", "reviews", "faqs", "statistics", "contact"].map((t) => (
+              {["leads", "services", "packages", "portfolio", "reviews", "team", "faqs", "statistics", "contact", "admins"].map((t) => (
                 <TabsTrigger key={t} value={t} className="capitalize">{t === "packages" ? "Packages & prices" : t}</TabsTrigger>
               ))}
             </TabsList>
@@ -127,9 +135,11 @@ function AdminPage() {
               <TabsContent value="packages"><CrudTable table="packages" queryKey="packages" fields={F.packages} titleKey="name" subtitleKey="category" /></TabsContent>
               <TabsContent value="portfolio"><CrudTable table="portfolio_items" queryKey="portfolio_items" fields={F.portfolio} titleKey="title" subtitleKey="category" /></TabsContent>
               <TabsContent value="reviews"><CrudTable table="reviews" queryKey="reviews" fields={F.reviews} titleKey="author_name" subtitleKey="content" /></TabsContent>
+              <TabsContent value="team"><CrudTable table="team_members" queryKey="team_members" fields={F.team} titleKey="name" subtitleKey="occupation" /></TabsContent>
               <TabsContent value="faqs"><CrudTable table="faqs" queryKey="faqs" fields={F.faqs} titleKey="question" /></TabsContent>
               <TabsContent value="statistics"><CrudTable table="statistics" queryKey="statistics" fields={F.statistics} titleKey="label" subtitleKey="value" /></TabsContent>
               <TabsContent value="contact"><SettingsPanel /></TabsContent>
+              <TabsContent value="admins"><AdminsPanel /></TabsContent>
             </div>
           </Tabs>
         )}
