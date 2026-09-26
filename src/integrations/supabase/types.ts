@@ -181,6 +181,7 @@ export type Database = {
       }
       reviews: {
         Row: {
+          author_image: string | null
           author_name: string
           author_role: string
           category: string | null
@@ -193,6 +194,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          author_image?: string | null
           author_name: string
           author_role?: string
           category?: string | null
@@ -205,6 +207,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          author_image?: string | null
           author_name?: string
           author_role?: string
           category?: string | null
