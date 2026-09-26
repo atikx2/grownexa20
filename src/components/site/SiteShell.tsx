@@ -1,13 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
-import { Menu, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
-import { settingsQuery, whatsappLink } from "@/lib/content";
+import { Menu, ChevronDown, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
+import { settingsQuery, whatsappLink, CATEGORY_PAGES } from "@/lib/content";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
   { to: "/portfolio", label: "Portfolio" },
   { to: "/pricing", label: "Pricing" },
   { to: "/reviews", label: "Reviews" },
