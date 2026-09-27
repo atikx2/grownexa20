@@ -1,0 +1,10 @@
+INSERT INTO public.services (category, slug, title, summary, details, icon, sort_order, is_active) VALUES
+('YouTube Promotion', 'yt-promo-1', 'Video Promotion Campaign', 'Targeted promotion to put your video in front of the right audience.', 'We plan placements and audiences around your content and goals. No fake views or bots — only real, policy-compliant promotion.', 'Youtube', 1, true),
+('YouTube Promotion', 'yt-promo-2', 'Channel Growth Strategy', 'A practical plan to grow your channel with real viewers.', 'Content positioning, upload cadence and packaging advice based on your niche. We never guarantee subscriber or view numbers.', 'Youtube', 2, true),
+('YouTube Promotion', 'yt-promo-3', 'Shorts & Clip Distribution', 'Repurposing and distributing Shorts to reach new audiences.', 'We cut and format your best moments for Shorts and short-form platforms.', 'Youtube', 3, true),
+('YouTube Promotion', 'yt-promo-4', 'Launch & Premiere Support', 'Promotion support for important video launches and premieres.', 'Coordinated promotion around your release window for maximum early traction.', 'Youtube', 4, true);
+
+INSERT INTO public.packages (category, name, price, currency, price_note, description, features, is_highlighted, sort_order, is_active) VALUES
+('YouTube Promotion', 'Starter Boost', 99, 'USD', 'per video', 'A focused promotion push for a single video.', ARRAY['One video promotion campaign','Audience targeting setup','7-day campaign','Campaign report'], false, 1, true),
+('YouTube Promotion', 'Growth Campaign', 299, 'USD', 'per month', 'Ongoing promotion for channels publishing regularly.', ARRAY['Up to 4 videos per month','Audience testing & optimisation','Shorts distribution included','Monthly performance report'], true, 2, true),
+('YouTube Promotion', 'Launch Partner', 599, 'USD', 'per launch', 'Full promotion support for a big release or premiere.', ARRAY['Multi-video launch campaign','Premiere & community push','Cross-platform clip distribution','Dedicated campaign manager','Post-launch review call'], false, 3, true);
