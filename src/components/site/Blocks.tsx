@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { Star, Globe, Youtube, Music, Search, Mail, MessageCircle } from "lucide-react";
+import { Star, Globe, Youtube, Music, Search, Mail, MessageCircle, Megaphone } from "lucide-react";
 import {
   CATEGORIES,
   packagesQuery,
@@ -15,6 +15,7 @@ import { EmptyState } from "@/components/site/Section";
 export const CATEGORY_ICON: Record<string, typeof Globe> = {
   Website: Globe,
   YouTube: Youtube,
+  "YouTube Promotion": Megaphone,
   Spotify: Music,
   SEO: Search,
 };
