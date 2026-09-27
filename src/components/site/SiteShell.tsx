@@ -25,6 +25,7 @@ const NAV = [
 const SERVICE_LINKS = [
   { slug: "website", label: "Web design" },
   { slug: "youtube", label: "YouTube" },
+  { slug: "youtube-video-promotion", label: "YouTube Video Promotion" },
   { slug: "seo", label: "SEO" },
   { slug: "spotify", label: "Spotify" },
 ] as const;
